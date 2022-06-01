@@ -1,10 +1,14 @@
-package com.aldikitta.mvvmsimplemovieapp.data
+package com.aldikitta.mvvmsimplemovieapp.data.model.tvShow
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "popular_shows")
 data class TvShow(
 
+    @PrimaryKey
     @SerializedName("first_air_date")
     val firstAirDate: String?,
     @SerializedName("id")

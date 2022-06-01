@@ -1,8 +1,8 @@
 package com.aldikitta.mvvmsimplemovieapp.data.api
 
-import com.aldikitta.mvvmsimplemovieapp.data.ArtistList
-import com.aldikitta.mvvmsimplemovieapp.data.MovieList
-import com.aldikitta.mvvmsimplemovieapp.data.TvShowList
+import com.aldikitta.mvvmsimplemovieapp.data.model.artist.ArtistList
+import com.aldikitta.mvvmsimplemovieapp.data.model.movie.MovieList
+import com.aldikitta.mvvmsimplemovieapp.data.model.tvShow.TvShowList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
