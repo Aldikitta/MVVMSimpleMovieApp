@@ -1,15 +1,14 @@
 package com.aldikitta.mvvmsimplemovieapp.presentation
 
 import android.app.Application
-import androidx.viewbinding.BuildConfig
 import com.aldikitta.mvvmsimplemovieapp.presentation.di.Injector
 import com.aldikitta.mvvmsimplemovieapp.presentation.di.artist.ArtistSubComponent
-import com.aldikitta.mvvmsimplemovieapp.presentation.di.core.AppComponent
-import com.aldikitta.mvvmsimplemovieapp.presentation.di.core.AppModule
-import com.aldikitta.mvvmsimplemovieapp.presentation.di.core.NetModule
-import com.aldikitta.mvvmsimplemovieapp.presentation.di.core.RemoteDataModule
+import com.aldikitta.mvvmsimplemovieapp.presentation.di.core.*
 import com.aldikitta.mvvmsimplemovieapp.presentation.di.movie.MovieSubComponent
 import com.aldikitta.mvvmsimplemovieapp.presentation.di.tvshow.TvShowSubComponent
+
+//import com.anushka.tmdbclient.presentation.di.core.DaggerAppComponent
+
 
 class App : Application(), Injector {
     private lateinit var appComponent: AppComponent
@@ -18,21 +17,21 @@ class App : Application(), Injector {
         super.onCreate()
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(applicationContext))
-            .netModule(NetModule(BuildConfig.BASE_URL))
-            .remoteDataModule(RemoteDataModule(BuildConfig.API_KEY))
+            .netModule(NetModule(com.aldikitta.mvvmsimplemovieapp.BuildConfig.BASE_URL))
+            .remoteDataModule(RemoteDataModule(com.aldikitta.mvvmsimplemovieapp.BuildConfig.API_KEY))
             .build()
 
     }
     override fun createMovieSubComponent(): MovieSubComponent {
-        TODO("Not yet implemented")
+        return appComponent.movieSubComponent().create()
 
     }
 
     override fun createTvShowSubComponent(): TvShowSubComponent {
-        TODO("Not yet implemented")
+        return appComponent.tvShowSubComponent().create()
     }
 
     override fun createArtistSubComponent(): ArtistSubComponent {
-        TODO("Not yet implemented")
+        return appComponent.artistSubComponent().create()
     }
 }

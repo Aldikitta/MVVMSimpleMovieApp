@@ -6,9 +6,10 @@ import com.aldikitta.mvvmsimplemovieapp.data.repository.movie.datasource.MovieCa
 import com.aldikitta.mvvmsimplemovieapp.data.repository.movie.datasource.MovieLocalDataSource
 import com.aldikitta.mvvmsimplemovieapp.data.repository.movie.datasource.MovieRemoteDataSource
 import com.aldikitta.mvvmsimplemovieapp.domain.movie.MovieRepository
+import java.lang.Exception
 
 class MovieRepositoryImplement(
-    private val movieRemoteDataSource: MovieRemoteDataSource,
+    private val movieRemoteDatasource: MovieRemoteDataSource,
     private val movieLocalDataSource: MovieLocalDataSource,
     private val movieCacheDataSource: MovieCacheDataSource
 ) : MovieRepository {
@@ -26,26 +27,24 @@ class MovieRepositoryImplement(
 
     suspend fun getMoviesFromAPI(): List<Movie> {
         lateinit var movieList: List<Movie>
-
         try {
-            val response = movieRemoteDataSource.getMovies()
+            val response = movieRemoteDatasource.getMovies()
             val body = response.body()
             if (body != null) {
                 movieList = body.movies
             }
-        } catch (e: Exception) {
-            Log.i("MYTAG", e.message.toString())
+        } catch (exception: Exception) {
+            Log.i("MyTag", exception.message.toString())
         }
         return movieList
     }
 
     suspend fun getMoviesFromDB(): List<Movie> {
         lateinit var movieList: List<Movie>
-
         try {
             movieList = movieLocalDataSource.getMoviesFromDB()
-        } catch (e: Exception) {
-            Log.i("MYTAG", e.message.toString())
+        } catch (exception: Exception) {
+            Log.i("MyTag", exception.message.toString())
         }
         if (movieList.size > 0) {
             return movieList
@@ -53,16 +52,16 @@ class MovieRepositoryImplement(
             movieList = getMoviesFromAPI()
             movieLocalDataSource.saveMoviesToDB(movieList)
         }
+
         return movieList
     }
 
     suspend fun getMoviesFromCache(): List<Movie> {
         lateinit var movieList: List<Movie>
-
         try {
             movieList = movieCacheDataSource.getMoviesFromCache()
-        } catch (e: Exception) {
-            Log.i("MYTAG", e.message.toString())
+        } catch (exception: Exception) {
+            Log.i("MyTag", exception.message.toString())
         }
         if (movieList.size > 0) {
             return movieList
@@ -70,6 +69,7 @@ class MovieRepositoryImplement(
             movieList = getMoviesFromDB()
             movieCacheDataSource.saveMoviesToCache(movieList)
         }
+
         return movieList
     }
 }
