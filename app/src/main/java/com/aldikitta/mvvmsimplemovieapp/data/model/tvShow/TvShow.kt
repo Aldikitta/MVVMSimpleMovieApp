@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "popular_shows")
 data class TvShow(
 
+//    @SerializedName("first_air_date")
+//    val firstAirDate: String?,
     @PrimaryKey
-    @SerializedName("first_air_date")
-    val firstAirDate: String?,
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
