@@ -25,17 +25,7 @@ class App : Application(), Injector {
 
     }
 
-//    override fun createMovieSubComponent(): MovieSubComponent {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override fun createTvShowSubComponent(): TvShowSubComponent {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override fun createArtistSubComponent(): ArtistSubComponent {
-//        TODO("Not yet implemented")
-//    }
+
     override fun createMovieSubComponent(): MovieSubComponent {
         return appComponent.movieSubComponent().create()
 
