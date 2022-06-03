@@ -25,7 +25,7 @@ class MovieRepositoryImplement(
         return newListOfMovies
     }
 
-    suspend fun getMoviesFromAPI(): List<Movie> {
+    private suspend fun getMoviesFromAPI(): List<Movie> {
         lateinit var movieList: List<Movie>
         try {
             val response = movieRemoteDatasource.getMovies()
@@ -39,7 +39,7 @@ class MovieRepositoryImplement(
         return movieList
     }
 
-    suspend fun getMoviesFromDB(): List<Movie> {
+    private suspend fun getMoviesFromDB(): List<Movie> {
         lateinit var movieList: List<Movie>
         try {
             movieList = movieLocalDataSource.getMoviesFromDB()
@@ -56,7 +56,7 @@ class MovieRepositoryImplement(
         return movieList
     }
 
-    suspend fun getMoviesFromCache(): List<Movie> {
+    private suspend fun getMoviesFromCache(): List<Movie> {
         lateinit var movieList: List<Movie>
         try {
             movieList = movieCacheDataSource.getMoviesFromCache()

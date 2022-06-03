@@ -1,9 +1,11 @@
 package com.aldikitta.mvvmsimplemovieapp.presentation
 
 import android.app.Application
+import com.aldikitta.mvvmsimplemovieapp.BuildConfig
 import com.aldikitta.mvvmsimplemovieapp.presentation.di.Injector
 import com.aldikitta.mvvmsimplemovieapp.presentation.di.artist.ArtistSubComponent
 import com.aldikitta.mvvmsimplemovieapp.presentation.di.core.*
+
 import com.aldikitta.mvvmsimplemovieapp.presentation.di.movie.MovieSubComponent
 import com.aldikitta.mvvmsimplemovieapp.presentation.di.tvshow.TvShowSubComponent
 
@@ -17,11 +19,23 @@ class App : Application(), Injector {
         super.onCreate()
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(applicationContext))
-            .netModule(NetModule(com.aldikitta.mvvmsimplemovieapp.BuildConfig.BASE_URL))
-            .remoteDataModule(RemoteDataModule(com.aldikitta.mvvmsimplemovieapp.BuildConfig.API_KEY))
+            .netModule(NetModule(BuildConfig.BASE_URL))
+            .remoteDataModule(RemoteDataModule(BuildConfig.API_KEY))
             .build()
 
     }
+
+//    override fun createMovieSubComponent(): MovieSubComponent {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun createTvShowSubComponent(): TvShowSubComponent {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun createArtistSubComponent(): ArtistSubComponent {
+//        TODO("Not yet implemented")
+//    }
     override fun createMovieSubComponent(): MovieSubComponent {
         return appComponent.movieSubComponent().create()
 
